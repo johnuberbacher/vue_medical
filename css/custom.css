@@ -5,6 +5,10 @@ html, body {
   font-size: 0.9rem;
 }
 
+.btn span {
+  font-size: 0.9rem
+}
+
 .table .thead-primary th {
   color: white;
   background-color: var(--primary);

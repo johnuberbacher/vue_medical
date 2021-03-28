@@ -71,21 +71,20 @@
                 </thead>
                 <tbody>
                   <tr v-for="doctor in doctors">
-                    <td style="vertical-align:middle;">{{doctor.id}}</td>
+                    <td style="vertical-align:middle;">{{doctor.doctorId}}</td>
                     <td>
-                      <div class="input-group"><input class="form-control" v-model="doctor.lastName" onkeyup="this.value = this.value.toLowerCase();" placeholder="{{doctor.lastName}}" /></div>
+                      <div class="input-group"><input type="text" class="form-control" v-model="doctor.doctorLastName" onkeyup="this.value = this.value.toLowerCase();" placeholder="{{doctor.doctorLastName}}" /></div>
                     </td>
                     <td>
-                      <div class="input-group"><input class="form-control" v-model="doctor.firstName" onkeyup="this.value = this.value.toLowerCase();" placeholder="{{doctor.lastName}}" /></div>
+                      <div class="input-group"><input type="text" class="form-control" v-model="doctor.doctorFirstName" onkeyup="this.value = this.value.toLowerCase();" placeholder="{{doctor.doctorFirstName}}" /></div>
                     </td>
                     <!--
                     <td>
-                      <div class="input-group"><input class="form-control" v-model="doctor.specialty" placeholder="{{doctor.specialty}}" /></div>
+                      <div class="input-group"><input class="form-control" v-model="doctor.inputDoctorspecialty" placeholder="{{doctor.inputDoctorspecialty}}" /></div>
                     </td>-->
-
                     <td>
                       <div class="input-group">
-                        <select class="form-control" v-model="doctor.lastName">
+                        <select class="form-control" v-model="doctor.specialty">
                           <option v-for="(doctor, index) in doctors" :value="doctor.specialty" :selected="doctor.specialty == doctor.specialty">
                             {{doctor.specialty}}
                           </option>
@@ -93,31 +92,31 @@
                       </div>
                     </td>
                     <td>
-                      <div class="input-group"><input type="number" min="0.1" max="5.0" step="0.1" class="form-control" v-model="doctor.rank" onkeyup="this.value = this.value.toLowerCase();" placeholder="{{doctor.rank}}" /></div>
+                      <div class="input-group"><input type="number" min="0.1" max="5.0" step="0.1" class="form-control" v-model="doctor.doctorRank" placeholder="{{doctor.doctorRank}}" /></div>
                     </td>
                     <td>
-                      <div class="input-group"><input class="form-control" v-model="doctor.biography" placeholder="{{doctor.biography}}" /></div>
+                      <div class="input-group"><input class="form-control" v-model="doctor.doctorBiography" placeholder="{{doctor.doctorBiography}}" /></div>
                     </td>
                     <td>
-                      <div class="input-group"><input class="form-control" v-model="doctor.medicalEducation" placeholder="{{doctor.medicalEducation}}" /></div>
+                      <div class="input-group"><input class="form-control" v-model="doctor.doctorMedicalEducation" placeholder="{{doctor.doctorMedicalEducation}}" /></div>
                     </td>
                     <td>
-                      <div class="input-group"><input class="form-control" v-model="doctor.internship" placeholder="{{doctor.internship}}" /></div>
+                      <div class="input-group"><input class="form-control" v-model="doctor.doctorInternship" placeholder="{{doctor.doctorInternship}}" /></div>
                     </td>
                     <td>
-                      <div class="input-group"><input class="form-control" v-model="doctor.residency" placeholder="{{doctor.residency}}" /></div>
+                      <div class="input-group"><input class="form-control" v-model="doctor.doctorResidency" placeholder="{{doctor.doctorResidency}}" /></div>
                     </td>
                     <td>
-                      <div class="input-group"><input class="form-control" v-model="doctor.fellowship" placeholder="{{doctor.fellowship}}" /></div>
+                      <div class="input-group"><input class="form-control" v-model="doctor.doctorFellowship" placeholder="{{doctor.doctorFellowship}}" /></div>
                     </td>
                     <td>
-                      <div class="input-group"><input class="form-control" v-model="doctor.imagePath" placeholder="{{doctor.imagePath}}" /></div>
+                      <div class="input-group"><input class="form-control" v-model="doctor.doctorImagePath" placeholder="{{doctor.doctorImagePath}}" /></div>
                     </td>
                     <td>
-                      <div class="input-group"><input class="form-control" v-model="doctor.created" placeholder="{{doctor.created}}" /></div>
+                      <div class="input-group"><input class="form-control" v-model="doctor.doctorCreated" placeholder="{{doctor.doctorCreated}}" /></div>
                     </td>
                     <td style="white-space: nowrap; text-align: right;"><button class="btn btn-primary" type="button" @click="updateDoctor(doctor)"><span class="material-icons-outlined">save</span></button><button class="btn btn-danger ml-1"
-                        type="button" @click="deleteD(doctor.id)"><span class="material-icons-outlined">delete</span></button></td>
+                        type="button" @click="deleteDoctor(doctor.id)"><span class="material-icons-outlined">delete</span></button></td>
                   </tr>
                 </tbody>
               </table>
@@ -137,13 +136,13 @@
                             <div class="col-6">
                               <div class="form-group">
                                 <label>First Name:</label>
-                                <input class="form-control" v-model="inputDoctorFirstName" placeholder="john" onkeyup="this.value = this.value.toLowerCase();" required="required">
+                                <input class="form-control" v-model="inputAddDoctorFirstName" placeholder="john" onkeyup="this.value = this.value.toLowerCase();" required="required">
                               </div>
                             </div>
                             <div class="col-6">
                               <div class="form-group">
                                 <label>Last Name:</label>
-                                <input class="form-control" v-model="inputDoctorLastName" placeholder="uberbacher" onkeyup="this.value = this.value.toLowerCase();" required="required">
+                                <input class="form-control" v-model="inputAddDoctorLastName" placeholder="uberbacher" onkeyup="this.value = this.value.toLowerCase();" required="required">
                               </div>
                             </div>
                           </div>
@@ -151,13 +150,13 @@
                         <div class="col-3">
                           <div class="form-group">
                             <label>Prefix:</label>
-                            <input class="form-control" v-model="inputDoctorPrefix" placeholder="dr." onkeyup="this.value = this.value.toLowerCase();" required="required">
+                            <input class="form-control" v-model="inputAddDoctorPrefix" placeholder="dr." onkeyup="this.value = this.value.toLowerCase();" required="required">
                           </div>
                         </div>
                       </div>
                       <div class="form-group">
                         <label>Specialty:</label>
-                       <select class="form-control" v-model="inputDoctorSpeciatly" required="required">
+                       <select class="form-control" v-model="inputAddDoctorSpeciatly" required="required">
                            <option v-for="(specialty, index) in specialties" :value="specialty.specialtyName">
                                {{specialty.specialtyName}}
                            </option>
@@ -165,37 +164,37 @@
                       </div>
                       <div class="form-group">
                         <label>Biography:</label>
-                        <input class="form-control" v-model="inputDoctorBiography" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit." required="required">
+                        <input class="form-control" v-model="inputAddDoctorBiography" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit." required="required">
                       </div>
                       <div class="row">
                         <div class="col-6">
                           <div class="form-group">
                             <label>Medical Education:</label>
-                            <input class="form-control" v-model="inputDoctorMedicalEducation" placeholder="uberbacher university" required="required">
+                            <input class="form-control" v-model="inputAddDoctorMedicalEducation" placeholder="uberbacher university" required="required">
                           </div>
                         </div>
                         <div class="col-6">
                           <div class="form-group">
                             <label>Internship:</label>
-                            <input class="form-control" v-model="inputDoctorInternship" placeholder="uberbacher university" required="required">
+                            <input class="form-control" v-model="inputAddDoctorInternship" placeholder="uberbacher university" required="required">
                           </div>
                         </div>
                         <div class="col-6">
                           <div class="form-group">
                             <label>Residency:</label>
-                            <input class="form-control" v-model="inputDoctorResidency" placeholder="uberbacher university" required="required">
+                            <input class="form-control" v-model="inputAddDoctorResidency" placeholder="uberbacher university" required="required">
                           </div>
                         </div>
                         <div class="col-6">
                           <div class="form-group">
                             <label>Fellowship:</label>
-                            <input class="form-control" v-model="inputDoctorFellowship" placeholder="uberbacher university" required="required">
+                            <input class="form-control" v-model="inputAddDoctorFellowship" placeholder="uberbacher university" required="required">
                           </div>
                         </div>
                       </div>
                         <div class="form-group">
                           <label>Image Path:</label>
-                          <input class="form-control" v-model="inputDoctorImagePath" placeholder="https://google.com/image.jpg" required="required">
+                          <input class="form-control" v-model="inputAddDoctorImagePath" placeholder="https://google.com/image.jpg" required="required">
                         </div>
                     </div>
                     <div class="modal-footer">

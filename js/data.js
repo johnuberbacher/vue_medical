@@ -5,17 +5,30 @@ new Vue({
   data: {
     doctors: [],
     specialties: [],
-    inputDoctorFirstName: null,
-    inputDoctorLastName: null,
-    inputDoctorSpeciatly: null,
-    inputDoctorPrefix: null,
-    inputDoctorMedicalEducation: null,
-    inputDoctorInternship: null,
-    inputDoctorResidency: null,
-    inputDoctorFellowship: null,
-    inputDoctorImagePath: null,
-    inputDoctorRank: null,
-    inputDoctorBiography: null,
+    inputAddDoctorFirstName: null,
+    inputAddDoctorLastName: null,
+    inputAddDoctorSpeciatly: null,
+    inputAddDoctorPrefix: null,
+    inputAddDoctorMedicalEducation: null,
+    inputAddDoctorInternship: null,
+    inputAddDoctorResidency: null,
+    inputAddDoctorFellowship: null,
+    inputAddDoctorImagePath: null,
+    inputAddDoctorRank: null,
+    inputAddDoctorBiography: null,
+
+    doctorFirstName: null,
+    doctorLastName: null,
+    doctorSpeciatly: null,
+    doctorPrefix: null,
+    doctorMedicalEducation: null,
+    doctorInternship: null,
+    doctorResidency: null,
+    doctorFellowship: null,
+    doctorImagePath: null,
+    doctorRank: null,
+    doctorBiography: null,
+
     inputSpecialtyName: null,
     inputSpecialtyDescription: null,
     selectedDoctor: '',
@@ -44,18 +57,19 @@ new Vue({
           querySnapshot.docs.map(doc => {
             let data = doc.data()
             return {
-              id: doc.id,
-              firstName: data.firstName,
-              lastName: data.lastName,
-              prefix: data.prefix,
-              specialty: data.specialty,
-              medicalEducation: data.medicalEducation,
-              internship: data.internship,
-              residency: data.residency,
-              fellowship: data.fellowship,
-              imagePath: data.imagePath,
-              rank: data.rank,
-              biography: data.biography,
+              doctorId: doc.id,
+              doctorFirstName: data.firstName,
+              doctorLastName: data.lastName,
+              doctorSpeciatly: data.specialty,
+              doctorCreated: data.created,
+              doctorSpecialty: data.specialty,
+              doctorMedicalEducation: data.medicalEducation,
+              doctorInternship: data.internship,
+              doctorResidency: data.residency,
+              doctorFellowship: data.fellowship,
+              doctorImagePath: data.imagePath,
+              doctorRank: data.rank,
+              doctorBiography: data.biography,
             }
           })
         )
@@ -63,19 +77,19 @@ new Vue({
     },
     addDoctor() {
       return db.collection('doctors').add({
-          firstName: this.inputDoctorFirstName,
-          lastName: this.inputDoctorLastName,
+          firstName: this.inputAddDoctorFirstName,
+          lastName: this.inputAddDoctorLastName,
           created: firebase.firestore.FieldValue.serverTimestamp(),
-          specialty: this.inputDoctorSpeciatly,
-          biography: this.inputDoctorBiography,
-          medicalEducation: this.inputDoctorMedicalEducation,
-          residency: this.inputDoctorResidency,
-          internship: this.inputDoctorInternship,
-          fellowship: this.inputDoctorFellowship,
-          imagePath: this.inputDoctorImagePath,
+          specialty: this.inputAddDoctorSpeciatly,
+          biography: this.inputAddDoctorBiography,
+          medicalEducation: this.inputAddDoctorMedicalEducation,
+          residency: this.inputAddDoctorResidency,
+          internship: this.inputAddDoctorInternship,
+          fellowship: this.inputAddDoctorFellowship,
+          imagePath: this.inputAddDoctorImagePath,
         })
         .then(() => {
-          alert(`New Doctor Saved: ${this.inputDoctorLastName}`)
+          alert(`New Doctor Saved: ${this.inputAddDoctorLastName}`)
           this.clearModals()
           this.fetchDoctors()
         })
@@ -83,11 +97,10 @@ new Vue({
     updateDoctor(doctor) {
       return db.collection('doctors').doc(doctor.id)
         .set({
-          firstName: doctor.firstName,
-          lastName: doctor.lastName,
+            firstName: doctor.firstName,
         })
         .then(() => {
-          alert(`Updated Doctor:  ${doctor.prefix} ${doctor.firstName} ${doctor.lastName} - ${doctor.id}`)
+          alert(`Updated Doctor:`)
           return this.fetchDoctors()
         })
     },
